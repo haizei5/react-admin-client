@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import Login from '../src/view/login'
+import PrivateRoute from '../src/routers/PrivateRoute'
+
 
 class App extends Component {
   render() {
     return (
-      <div style={{ color: '#fff', background: 'black' }}><span>Hello,React</span></div>
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <PrivateRoute path="/" component={Login} />
+      </Switch>
     )
   }
 }
