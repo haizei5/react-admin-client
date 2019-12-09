@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Login from '../src/view/login'
-import PrivateRoute from '../src/routers/PrivateRoute'
+import Login from './view/Login'
+import Home from './view/Home'
+import PrivateRoute from './routers/PrivateRoute'
 
 
 class App extends Component {
@@ -9,7 +10,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/login" component={Login} />
-        <PrivateRoute path="/" component={Login} />
+        <PrivateRoute path="/" component={Home} />
       </Switch>
     )
   }

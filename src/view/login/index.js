@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { saveUserLogin } from '../../redux/action'
+import Methods from '../..//utils/utilMethods'
 import './login.scss'
 
 const Error = ({ errorType }) => {
@@ -6,7 +11,7 @@ const Error = ({ errorType }) => {
         <div id="error" className="row">
             <div className="col-sm-12">
                 <div className="error">
-                    <img src="../../src/assest/images/error.png" onClick={() => errorType.closeError()} />
+                    <img alt='error' src="../../src/assent/images/error.png" onClick={() => errorType.closeError()} />
                     <span className="errorContent">{errorType.state.errorInfo}</span>
                 </div>
             </div>
@@ -15,14 +20,15 @@ const Error = ({ errorType }) => {
 };
 //登录
 class Login extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            userEmail: "",
-            passWord: "",
-            error: false,
-            errorInfo: ""
-        }
+    static propTypes = {
+        userLogin: PropTypes.object.isRequired,
+        saveUserLogin: PropTypes.func.isRequired
+    }
+    state = {
+        userEmail: "",
+        passWord: "",
+        error: false,
+        errorInfo: ""
     }
     //更新input值
     handleInput(e) {
@@ -44,7 +50,7 @@ class Login extends Component {
         console.log(this.props)
         let handType, errorInfo;
         const reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-        if (this.state.userEmail != '') {
+        if (this.state.userEmail !== '') {
             if (!reg.test(this.state.userEmail)) {
                 errorInfo = "邮箱格式不正确";
                 handType = true
@@ -53,7 +59,7 @@ class Login extends Component {
             errorInfo = "邮箱不能为空";
             handType = true
         }
-        if (this.state.passWord == '') {
+        if (this.state.passWord === '') {
             debugger;
             errorInfo = "请输入密码";
             handType = true
@@ -68,8 +74,9 @@ class Login extends Component {
             let userInfo = {
                 isLogin: true
             }
-            this.props.saveUserInfo(userInfo)
-            this.props.history.replace('/home')
+            Methods.setStorage('isLogin', userInfo)
+            this.props.saveUserLogin(userInfo)
+            this.props.history.replace('/')
             return
         }
     }
@@ -104,7 +111,7 @@ class Login extends Component {
                                                 <label htmlFor="styled-checkbox-2">记住密码</label>
                                             </li>
                                             <li>
-                                                <a href="#">忘记邮箱或密码 ?</a>
+                                                <Link to="/">忘记邮箱或密码 ?</Link>
                                             </li>
 
                                         </ul>
@@ -132,15 +139,11 @@ class Login extends Component {
         )
     }
 }
-// const mapStateToProps = state => {
-//     return {
-//         userLogin: state.userLogin
-//     };
-// };
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         saveUserInfo: userLogin => dispatch(saveUserInfo(userLogin))
-//     };
-// };
-export default Login;
+const mapStateToProps = (state) => ({ userLogin: state.userLogin })
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveUserLogin: (userLogin) => dispatch(saveUserLogin(userLogin))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
