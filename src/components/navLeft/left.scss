@@ -1,0 +1,18 @@
+#leftNav {
+  height: 100%
+}
+
+.left-title {
+  color: #fff;
+  height: 80px;
+  font-size: 26px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  img {
+    width: 44px;
+    height: 44px;
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout } from 'antd'
 import NavLeft from '../../components/navLeft/index'
+import ContentText from '../../components/contentText/index'
 
 const { Header, Footer, Sider, Content } = Layout
 
@@ -13,8 +14,12 @@ class Home extends React.Component {
             <NavLeft />
           </Sider>
           <Layout>
-            <Header>头部</Header>
-            <Content>内容</Content>
+            <Header>
+              头部
+            </Header>
+            <Content>
+              <ContentText />
+            </Content>
             <Footer>底部</Footer>
           </Layout>
         </Layout>

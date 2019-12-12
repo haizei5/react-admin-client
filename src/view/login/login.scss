@@ -379,26 +379,23 @@ li:hover {
 }
 
 .error {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    height: 30px;
+    border: 2px solid #E0565A;
+    border-radius: 5px;
 
     img {
         width: 20px;
-        position: absolute;
-        top: 5px;
-        left: 24px;
-        z-index: 999
+        margin-left: 4px;
+        margin-right: 6px;
     }
 
     .errorContent {
-        display: block;
         color: #9e1818;
-        border: 2px solid #E0565A;
-        padding: 0px 33px;
-        height: 30px;
-        line-height: 30px;
         width: 100%;
-        border-radius: 4px;
-        position: relative;
-        z-index: 1
     }
 }

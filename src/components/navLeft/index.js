@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import './left.scss'
 
 
 class NavLeft extends Component {
   render() {
-    const src = "../../src/assent/images/logo.png"
+    const src = "assets/images/logo.png"
     return (
-      <div>
-        <div>
+      <div id="leftNav">
+        <div className="left-title">
           <img alt="logo" src={src} />
           <span>React Mall</span>
         </div>

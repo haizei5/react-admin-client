@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { saveUserLogin } from '../../redux/action'
-import Methods from '../..//utils/utilMethods'
+import Methods from '../../utils/utilMethods'
+import apiMethod from '../../service'
 import './login.scss'
 
 const Error = ({ errorType }) => {
@@ -11,7 +12,7 @@ const Error = ({ errorType }) => {
         <div id="error" className="row">
             <div className="col-sm-12">
                 <div className="error">
-                    <img alt='error' src="../../src/assent/images/error.png" onClick={() => errorType.closeError()} />
+                    <img alt='error' src="assets/images/error.png" onClick={() => errorType.closeError()} />
                     <span className="errorContent">{errorType.state.errorInfo}</span>
                 </div>
             </div>
@@ -34,9 +35,9 @@ class Login extends Component {
     handleInput(e) {
         let key = e.target.name;
         const newVal = e.target.value;
-        this.setState({
+        this.setState(() => ({
             [key]: newVal
-        })
+        }))
     }
     //校验信息显示
     closeError() {
@@ -46,7 +47,11 @@ class Login extends Component {
     }
     //登录保存
     onSave() {
-        // debugger;
+        debugger;
+        // apiMethod.userLogin(this.state).then(data => {
+        //     console.log(data)
+        // })
+        // return;
         console.log(this.props)
         let handType, errorInfo;
         const reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
